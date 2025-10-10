@@ -3,7 +3,9 @@ import React from 'react';
 const Hero = () => {
   return (
     <section style={{
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      backgroundImage: 'url(/assets/CountrySideBck.png)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
       color: 'white',
       padding: '80px 40px',
       textAlign: 'center'

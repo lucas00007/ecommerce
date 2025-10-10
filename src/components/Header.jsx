@@ -4,7 +4,7 @@ import { ShoppingCart } from 'lucide-react';
 const Header = ({ cartItemCount, onCartClick }) => {
   return (
     <header style={{
-      backgroundColor: '#333',
+      background: 'linear-gradient(135deg, #51c2bc 0%, #764ba2 100%)',
       color: 'white',
       padding: '20px 40px',
       display: 'flex',
@@ -12,7 +12,10 @@ const Header = ({ cartItemCount, onCartClick }) => {
       alignItems: 'center',
       boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
     }}>
-      <h1 style={{ margin: 0, fontSize: '28px' }}>My Store</h1>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+        <img src="/assets/SDS Logo.JPG" alt="Southern Designs Store" style={{ height: '50px' }} />
+        <h1 style={{ margin: 0, fontSize: '28px' }}>Southern Designs Store</h1>
+      </div>
       <button
         onClick={onCartClick}
         style={{

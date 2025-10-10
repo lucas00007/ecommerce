@@ -5,7 +5,7 @@ export const products = [
     price: 89.99,
     category: "Men",
     size: "Medium",
-    image: "https://via.placeholder.com/300x300?text=Men+Sweater+M",
+    image: "/assets/SweaterMan.jpg",
     description: "Handcrafted Andean alpaca sweater for men - Medium size"
   },
   {
@@ -14,7 +14,7 @@ export const products = [
     price: 89.99,
     category: "Men",
     size: "Large",
-    image: "https://via.placeholder.com/300x300?text=Men+Sweater+L",
+    image: "/assets/SweaterMan.jpg",
     description: "Handcrafted Andean alpaca sweater for men - Large size"
   },
   {
