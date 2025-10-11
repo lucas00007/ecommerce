@@ -12,12 +12,13 @@ const ProductGrid = ({ products, onAddToCart }) => {
 
   return (
     <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-      gap: '30px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '50px',
       padding: '40px',
-      maxWidth: '1400px',
-      margin: '0 auto'
+      maxWidth: '800px',
+      margin: '0 auto',
+      alignItems: 'center'
     }}>
       {products.map(product => (
         <ProductCard

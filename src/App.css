@@ -1,5 +1,10 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .App {
-  text-align: center;
+  min-height: 100vh;
+  padding-top: 140px;
 }
 
 .App-logo {
