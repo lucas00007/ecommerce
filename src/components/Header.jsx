@@ -11,15 +11,15 @@ const Header = ({ cartItemCount, onCartClick }) => {
       zIndex: 100,
       background: 'linear-gradient(135deg, #51c2bc 0%, #764ba2 100%)',
       color: 'white',
-      padding: '20px 40px',
+      padding: '15px 40px',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
       boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-        <img src="/assets/SDS Logo.JPG" alt="Southern Designs Store" style={{ height: '100px', width: 'auto' }} />
-        <h1 style={{ margin: 0, fontSize: '28px' }}>Southern Designs Store</h1>
+        <img src="/assets/SDS%20Logo.JPG" alt="Southern Designs Store" style={{ height: '70px', width: 'auto', minWidth: '100px' }} />
+        <h1 style={{ margin: 0, fontSize: '28px' }}>SDS</h1>
       </div>
       <nav style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
         <a href="#home" style={{ color: 'white', textDecoration: 'none', fontSize: '16px', fontWeight: '500' }}>Home</a>

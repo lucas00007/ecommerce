@@ -6,6 +6,7 @@ export const products = [
     category: "Men",
     size: "Medium",
     image: "/assets/Man-Sweater3.jpg",
+    images: ["/assets/Man-Sweater3.jpg", "/assets/Man-Sweater4.jpg", "/assets/SweaterMan.jpg"],
     description: "Handcrafted Andean alpaca sweater for men - Medium size"
   },
   {
@@ -15,6 +16,7 @@ export const products = [
     category: "Men",
     size: "Large",
     image: "/assets/Man-Sweater4.jpg",
+    images: ["/assets/Man-Sweater4.jpg", "/assets/Man-Sweater3.jpg", "/assets/SweaterMan.jpg"],
     description: "Handcrafted Andean alpaca sweater for men - Large size"
   },
   {
@@ -24,6 +26,7 @@ export const products = [
     category: "Women",
     size: "Medium",
     image: "/assets/Female-Sweater3.jpg",
+    images: ["/assets/Female-Sweater3.jpg", "/assets/Female-Sweater4.jpg", "/assets/Female-Sweater5.jpg"],
     description: "Handcrafted Andean alpaca sweater for women - Medium size"
   },
   {
@@ -33,6 +36,7 @@ export const products = [
     category: "Women",
     size: "Large",
     image: "/assets/Female-Sweater4.jpg",
+    images: ["/assets/Female-Sweater4.jpg", "/assets/Female-Sweater3.jpg", "/assets/Female-Sweater5.jpg"],
     description: "Handcrafted Andean alpaca sweater for women - Large size"
   },
   {
@@ -42,6 +46,7 @@ export const products = [
     category: "Women",
     color: "Gray",
     image: "/assets/Female-Poncho-Red1.jpg",
+    images: ["/assets/Female-Poncho-Red1.jpg", "/assets/Female-Poncho-Red2.jpg"],
     description: "Beautiful handwoven alpaca poncho in gray",
     grayscale: true
   },
@@ -52,6 +57,7 @@ export const products = [
     category: "Women",
     color: "Red",
     image: "/assets/Female-Poncho-Red2.jpg",
+    images: ["/assets/Female-Poncho-Red2.jpg", "/assets/Female-Poncho-Red1.jpg"],
     description: "Beautiful handwoven alpaca poncho in red"
   },
   {
@@ -61,6 +67,7 @@ export const products = [
     category: "Women",
     color: "Brown",
     image: "/assets/Female-Poncho-Brown1.jpg",
+    images: ["/assets/Female-Poncho-Brown1.jpg", "/assets/Female-Poncho-Brown2.jpg", "/assets/Female-Poncho-Brown3.jpg"],
     description: "Beautiful handwoven alpaca poncho in brown"
   }
 ];
