@@ -242,6 +242,17 @@ const CheckoutModal = ({ isOpen, onClose, total, user, cart = [] }) => {
               <CreditCard size={24} style={{ verticalAlign: 'middle', marginRight: '10px' }} />
               Payment Information
             </h2>
+            <div style={{ 
+              backgroundColor: '#fff3cd', 
+              border: '1px solid #ffc107', 
+              borderRadius: '8px', 
+              padding: '15px', 
+              marginBottom: '20px',
+              fontSize: '14px',
+              color: '#856404'
+            }}>
+              ⚠️ <strong>Demo Mode:</strong> This is a test checkout. No actual payment will be processed.
+            </div>
             <form onSubmit={handlePaymentSubmit}>
               <div style={{ marginBottom: '15px' }}>
                 <label style={{ display: 'block', marginBottom: '5px', fontWeight: '500' }}>Card Number</label>

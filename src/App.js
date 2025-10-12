@@ -103,22 +103,6 @@ function App() {
       <div id="shop">
       <div style={{ padding: isMobile ? '15px 0' : '20px 0' }}>
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <div style={{ textAlign: 'center', marginTop: '10px' }}>
-          <button
-            onClick={handleSeedProducts}
-            style={{
-              backgroundColor: '#28a745',
-              color: 'white',
-              border: 'none',
-              padding: '10px 20px',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              fontSize: '14px'
-            }}
-          >
-            🌱 Seed Products to Database (Click Once)
-          </button>
-        </div>
       </div>
       <CategoryFilter
         selectedCategory={selectedCategory}
