@@ -22,7 +22,7 @@ const Hero = () => {
       }} />
       <div style={{ position: 'relative', zIndex: 2 }}>
         <h2 style={{ fontSize: '48px', margin: '0 0 20px 0' }}>
-          Welcome to Southern Design Store
+          Welcome to Southern Designs Store
         </h2>
         <p style={{ fontSize: '20px', margin: 0 }}>
           Discover amazing products at great prices

@@ -43,7 +43,7 @@ const ProductCard = ({ product, onAddToCart, onViewDetails }) => {
       e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
     }}
     >
-      {product.id <= 2 && (
+      {product.id <= 4 && (
         <div style={{
           position: 'absolute',
           top: '20px',
@@ -89,7 +89,7 @@ const ProductCard = ({ product, onAddToCart, onViewDetails }) => {
                   height: isMobile ? '240px' : '320px',
                   objectFit: 'cover',
                   borderRadius: '12px',
-                  filter: product.grayscale ? 'grayscale(100%)' : 'none'
+                  filter: product.grayscale ? 'grayscale(100%) brightness(1.1)' : 'none'
                 }}
               />
               <div style={{
