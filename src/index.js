@@ -4,9 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Amplify } from 'aws-amplify';
-import awsExports from './aws-exports';
 
-Amplify.configure(awsExports);
+try {
+  const awsExports = require('./aws-exports').default;
+  Amplify.configure(awsExports);
+} catch (e) {
+  console.warn('AWS Amplify configuration not found');
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
