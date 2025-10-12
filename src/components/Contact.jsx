@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import TermsOfService from './TermsOfService';
+import PrivacyPolicy from './PrivacyPolicy';
+import ReturnPolicy from './ReturnPolicy';
 
 const Contact = () => {
+  const [showTerms, setShowTerms] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showReturns, setShowReturns] = useState(false);
+
   return (
     <>
       <section id="contact" style={{
@@ -47,6 +54,12 @@ const Contact = () => {
           <h3 style={{ fontSize: '24px', marginBottom: '20px', fontWeight: '600' }}>Southern Designs Store</h3>
           <p style={{ fontSize: '16px', marginBottom: '20px', opacity: 0.9 }}>Authentic Andean Alpaca Products</p>
           
+          <div style={{ marginBottom: '20px', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button onClick={() => setShowTerms(true)} style={{ background: 'none', border: 'none', color: 'white', textDecoration: 'underline', cursor: 'pointer', fontSize: '14px' }}>Terms of Service</button>
+            <button onClick={() => setShowPrivacy(true)} style={{ background: 'none', border: 'none', color: 'white', textDecoration: 'underline', cursor: 'pointer', fontSize: '14px' }}>Privacy Policy</button>
+            <button onClick={() => setShowReturns(true)} style={{ background: 'none', border: 'none', color: 'white', textDecoration: 'underline', cursor: 'pointer', fontSize: '14px' }}>Return Policy</button>
+          </div>
+          
           <div style={{ 
             borderTop: '1px solid rgba(255,255,255,0.3)', 
             paddingTop: '20px', 
@@ -60,6 +73,10 @@ const Contact = () => {
           </div>
         </div>
       </footer>
+      
+      <TermsOfService isOpen={showTerms} onClose={() => setShowTerms(false)} />
+      <PrivacyPolicy isOpen={showPrivacy} onClose={() => setShowPrivacy(false)} />
+      <ReturnPolicy isOpen={showReturns} onClose={() => setShowReturns(false)} />
     </>
   );
 };
