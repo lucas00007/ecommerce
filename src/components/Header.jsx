@@ -23,7 +23,7 @@ const Header = ({ cartItemCount, onCartClick, user, onAuthClick, onLogout }) => 
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '10px' : '15px' }}>
         <img 
-          src="/assets/SDS Logo.JPG" 
+          src="/assets/SDSLogo.jpg" 
           alt="Southern Designs Store" 
           style={{ 
             height: isMobile ? '50px' : '70px', 
