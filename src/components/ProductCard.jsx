@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { ShoppingCart, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ShoppingCart, ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import Button from './Button';
+import { useResponsive } from '../hooks/useResponsive';
 
-const ProductCard = ({ product, onAddToCart }) => {
+const ProductCard = ({ product, onAddToCart, onViewDetails }) => {
   const images = product.images || [product.image];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { isMobile } = useResponsive();
 
   const nextImage = (e) => {
     e.stopPropagation();
@@ -16,10 +18,12 @@ const ProductCard = ({ product, onAddToCart }) => {
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
   return (
-    <div style={{
+    <div 
+      onClick={() => onViewDetails && onViewDetails(product)}
+      style={{
       border: '2px solid #e0e0e0',
       borderRadius: '15px',
-      padding: '30px',
+      padding: isMobile ? '15px' : '30px',
       background: 'linear-gradient(135deg, #fdffff 0%, #fafffe 100%)',
       boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
       transition: 'transform 0.3s, box-shadow 0.3s',
@@ -81,8 +85,8 @@ const ProductCard = ({ product, onAddToCart }) => {
                 alt={product.name}
                 style={{
                   width: '100%',
-                  maxWidth: '400px',
-                  height: '320px',
+                  maxWidth: isMobile ? '280px' : '400px',
+                  height: isMobile ? '240px' : '320px',
                   objectFit: 'cover',
                   borderRadius: '12px',
                   filter: product.grayscale ? 'grayscale(100%)' : 'none'
@@ -134,8 +138,8 @@ const ProductCard = ({ product, onAddToCart }) => {
             alt={product.name}
             style={{
               width: '100%',
-              maxWidth: '400px',
-              height: '320px',
+              maxWidth: isMobile ? '280px' : '400px',
+              height: isMobile ? '240px' : '320px',
               objectFit: 'cover',
               borderRadius: '12px',
               filter: product.grayscale ? 'grayscale(100%)' : 'none'
@@ -143,22 +147,30 @@ const ProductCard = ({ product, onAddToCart }) => {
           />
         )}
       </div>
-      <h3 style={{ margin: '0 0 10px 0', fontSize: '20px' }}>{product.name}</h3>
-      <p style={{ color: '#666', margin: '0 0 10px 0', fontSize: '14px' }}>
+      <h3 style={{ margin: '0 0 10px 0', fontSize: isMobile ? '18px' : '20px' }}>{product.name}</h3>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '10px' }}>
+        {[1, 2, 3, 4, 5].map((star) => (
+          <Star key={star} size={14} fill="#ffc107" color="#ffc107" />
+        ))}
+        <span style={{ fontSize: '12px', color: '#666', marginLeft: '5px' }}>(4.8)</span>
+      </div>
+      <p style={{ color: '#666', margin: '0 0 10px 0', fontSize: isMobile ? '13px' : '14px' }}>
         {product.description}
       </p>
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: '15px'
+        marginTop: '15px',
+        flexDirection: isMobile ? 'column' : 'row',
+        gap: isMobile ? '10px' : '0'
       }}>
-        <span style={{ fontSize: '24px', fontWeight: 'bold', color: '#007bff' }}>
+        <span style={{ fontSize: isMobile ? '20px' : '24px', fontWeight: 'bold', color: '#007bff' }}>
           ${product.price}
         </span>
         <Button onClick={() => onAddToCart(product)}>
-          <ShoppingCart size={18} style={{ marginRight: '5px', verticalAlign: 'middle' }} />
-          Add
+          <ShoppingCart size={16} style={{ marginRight: '5px', verticalAlign: 'middle' }} />
+          {isMobile ? 'Add to Cart' : 'Add'}
         </Button>
       </div>
     </div>

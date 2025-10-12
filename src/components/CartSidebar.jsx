@@ -2,8 +2,10 @@ import React from 'react';
 import { X } from 'lucide-react';
 import CartItem from './CartItem';
 import Button from './Button';
+import { useResponsive } from '../hooks/useResponsive';
 
 const CartSidebar = ({ isOpen, onClose, cart, onUpdateQuantity, onRemove, total, onCheckout }) => {
+  const { isMobile } = useResponsive();
   if (!isOpen) return null;
 
   return (
@@ -24,7 +26,7 @@ const CartSidebar = ({ isOpen, onClose, cart, onUpdateQuantity, onRemove, total,
         position: 'fixed',
         top: 0,
         right: 0,
-        width: '400px',
+        width: isMobile ? '100%' : '400px',
         maxWidth: '100%',
         height: '100vh',
         backgroundColor: 'white',

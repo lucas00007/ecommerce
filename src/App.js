@@ -11,11 +11,18 @@ import ProductGrid from './components/ProductGrid';
 import ProductSection from './components/ProductSection';
 import CartSidebar from './components/CartSidebar';
 import CheckoutModal from './components/CheckoutModal';
+import ProductDetailsModal from './components/ProductDetailsModal';
 import { products } from './data/products';
 import { useCart } from './hooks/useCart';
 import { useSearch } from './hooks/useSearch';
+import { useResponsive } from './hooks/useResponsive';
+import { useAuth } from './hooks/useAuth';
+import AuthModal from './components/AuthModal';
+import { seedProducts } from './seedProducts';
 
 function App() {
+  const { isMobile } = useResponsive();
+  const { user, login, logout } = useAuth();
   const {
     cart,
     isCartOpen,
@@ -37,10 +44,37 @@ function App() {
   } = useSearch(products);
 
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+
+  const handleViewDetails = (product) => {
+    setSelectedProduct(product);
+    setIsDetailsOpen(true);
+  };
 
   const handleCheckout = () => {
-    setIsCheckoutOpen(true);
-    setIsCartOpen(false);
+    if (!user) {
+      setIsAuthOpen(true);
+      setIsCartOpen(false);
+    } else {
+      setIsCheckoutOpen(true);
+      setIsCartOpen(false);
+    }
+  };
+
+  const handleLogin = (userData) => {
+    login(userData);
+    if (cart.length > 0) {
+      setIsCheckoutOpen(true);
+    }
+  };
+
+  const handleSeedProducts = async () => {
+    if (window.confirm('Add all products to database? (Do this only once!)')) {
+      await seedProducts();
+      alert('Products added! Check console.');
+    }
   };
 
   const handleCloseCheckout = () => {
@@ -60,39 +94,62 @@ function App() {
       <Header
         cartItemCount={getItemCount()}
         onCartClick={() => setIsCartOpen(true)}
+        user={user}
+        onAuthClick={() => setIsAuthOpen(true)}
+        onLogout={logout}
       />
       </div>
       <Hero />
       <div id="shop">
-      <div style={{ padding: '20px 0' }}>
+      <div style={{ padding: isMobile ? '15px 0' : '20px 0' }}>
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          <button
+            onClick={handleSeedProducts}
+            style={{
+              backgroundColor: '#28a745',
+              color: 'white',
+              border: 'none',
+              padding: '10px 20px',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '14px'
+            }}
+          >
+            🌱 Seed Products to Database (Click Once)
+          </button>
+        </div>
       </div>
       <CategoryFilter
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
       {selectedCategory === 'All' ? (
-        <div style={{ padding: '40px 0' }}>
+        <div style={{ padding: isMobile ? '20px 0' : '40px 0' }}>
           <ProductSection
             title="Men's Andean Alpaca Sweaters"
             products={filteredProducts.filter(p => p.category === 'Men')}
             onAddToCart={addToCart}
+            onViewDetails={handleViewDetails}
           />
           <ProductSection
             title="Women's Andean Alpaca Sweaters"
             products={filteredProducts.filter(p => p.category === 'Women' && p.size)}
             onAddToCart={addToCart}
+            onViewDetails={handleViewDetails}
           />
           <ProductSection
             title="Women's Alpaca Ponchos"
             products={filteredProducts.filter(p => p.category === 'Women' && p.color)}
             onAddToCart={addToCart}
+            onViewDetails={handleViewDetails}
           />
         </div>
       ) : (
         <ProductGrid
           products={filteredProducts}
           onAddToCart={addToCart}
+          onViewDetails={handleViewDetails}
         />
       )}
       <CartSidebar
@@ -111,6 +168,20 @@ function App() {
         isOpen={isCheckoutOpen}
         onClose={handleCloseCheckout}
         total={getTotal()}
+        user={user}
+        cart={cart}
+      />
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        onLogin={handleLogin}
+      />
+      <ProductDetailsModal
+        product={selectedProduct}
+        isOpen={isDetailsOpen}
+        onClose={() => setIsDetailsOpen(false)}
+        onAddToCart={addToCart}
+        user={user}
       />
     </div>
   );

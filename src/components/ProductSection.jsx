@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductCard from './ProductCard';
 
-const ProductSection = ({ title, products, onAddToCart }) => {
+const ProductSection = ({ title, products, onAddToCart, onViewDetails }) => {
   return (
     <div style={{ marginBottom: '100px', marginTop: '100px' }}>
       <h2 style={{
@@ -26,6 +26,7 @@ const ProductSection = ({ title, products, onAddToCart }) => {
             key={product.id}
             product={product}
             onAddToCart={onAddToCart}
+            onViewDetails={onViewDetails}
           />
         ))}
       </div>

@@ -1,7 +1,9 @@
 import React from 'react';
 import ProductCard from './ProductCard';
+import { useResponsive } from '../hooks/useResponsive';
 
-const ProductGrid = ({ products, onAddToCart }) => {
+const ProductGrid = ({ products, onAddToCart, onViewDetails }) => {
+  const { isMobile } = useResponsive();
   if (products.length === 0) {
     return (
       <div style={{ textAlign: 'center', padding: '60px 20px' }}>
@@ -14,8 +16,8 @@ const ProductGrid = ({ products, onAddToCart }) => {
     <div style={{
       display: 'flex',
       flexDirection: 'column',
-      gap: '50px',
-      padding: '40px',
+      gap: isMobile ? '30px' : '50px',
+      padding: isMobile ? '20px 15px' : '40px',
       maxWidth: '800px',
       margin: '0 auto',
       alignItems: 'center'
@@ -25,6 +27,7 @@ const ProductGrid = ({ products, onAddToCart }) => {
           key={product.id}
           product={product}
           onAddToCart={onAddToCart}
+          onViewDetails={onViewDetails}
         />
       ))}
     </div>

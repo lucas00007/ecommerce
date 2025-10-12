@@ -7,6 +7,47 @@ html {
   padding-top: 100px;
 }
 
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .App {
+    padding-top: 70px;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+  
+  /* Touch-friendly buttons */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Responsive text */
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.2rem; }
+  
+  /* Responsive spacing */
+  .container {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    padding-top: 60px;
+  }
+  
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.3rem; }
+  h3 { font-size: 1.1rem; }
+  
+  .container {
+    padding: 0 10px;
+  }
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
