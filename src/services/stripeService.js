@@ -1,8 +1,6 @@
 import { loadStripe } from '@stripe/stripe-js';
 
-// TODO: Replace with your actual Stripe publishable key
-// Get this from: https://dashboard.stripe.com/apikeys
-const STRIPE_PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || 'pk_test_YOUR_KEY_HERE';
+const STRIPE_PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 
 let stripePromise;
 export const getStripe = () => {
@@ -12,14 +10,18 @@ export const getStripe = () => {
   return stripePromise;
 };
 
-// This is a placeholder - you'll need a backend to create payment intents
 export const createPaymentIntent = async (amount) => {
-  // TODO: Call your backend API to create a Stripe payment intent
-  // For now, this is a mock implementation
-  console.warn('⚠️ Payment processing not configured. Set up Stripe backend.');
-  
-  return {
-    clientSecret: 'mock_client_secret',
-    error: 'Payment processing not yet configured'
-  };
+  try {
+    const response = await fetch('/.netlify/functions/create-payment-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount }),
+    });
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Payment error:', error);
+    return { error: error.message };
+  }
 };

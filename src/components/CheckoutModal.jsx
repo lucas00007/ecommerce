@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { CheckCircle, CreditCard, X } from 'lucide-react';
+import { Elements } from '@stripe/react-stripe-js';
+import { getStripe } from '../services/stripeService';
 import Button from './Button';
+import StripeCheckout from './StripeCheckout';
 import { useResponsive } from '../hooks/useResponsive';
 import { sendOrderConfirmationEmail } from '../services/emailService';
+
+const stripePromise = getStripe();
 
 const CheckoutModal = ({ isOpen, onClose, total, user, cart = [] }) => {
   const [step, setStep] = useState('shipping'); // 'shipping', 'payment', 'success'
@@ -28,9 +33,7 @@ const CheckoutModal = ({ isOpen, onClose, total, user, cart = [] }) => {
     setStep('payment');
   };
 
-  const handlePaymentSubmit = async (e) => {
-    e.preventDefault();
-    
+  const handlePaymentSuccess = async (paymentMethod) => {
     const orderNumber = `ORD-${Date.now()}`;
     const orderData = {
       email: shippingInfo.email,
@@ -43,6 +46,10 @@ const CheckoutModal = ({ isOpen, onClose, total, user, cart = [] }) => {
     
     await sendOrderConfirmationEmail(orderData);
     setStep('success');
+  };
+
+  const handlePaymentError = (error) => {
+    alert('Payment failed: ' + error);
   };
 
   const handleClose = () => {
@@ -243,91 +250,35 @@ const CheckoutModal = ({ isOpen, onClose, total, user, cart = [] }) => {
               Payment Information
             </h2>
             <div style={{ 
-              backgroundColor: '#fff3cd', 
-              border: '1px solid #ffc107', 
+              backgroundColor: '#d1ecf1', 
+              border: '1px solid #0c5460', 
               borderRadius: '8px', 
               padding: '15px', 
               marginBottom: '20px',
               fontSize: '14px',
-              color: '#856404'
+              color: '#0c5460'
             }}>
-              ⚠️ <strong>Demo Mode:</strong> This is a test checkout. No actual payment will be processed.
+              ℹ️ <strong>Test Mode:</strong> Use card 4242 4242 4242 4242 with any future date and CVC.
             </div>
-            <form onSubmit={handlePaymentSubmit}>
-              <div style={{ marginBottom: '15px' }}>
-                <label style={{ display: 'block', marginBottom: '5px', fontWeight: '500' }}>Card Number</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="1234 5678 9012 3456"
-                  value={paymentInfo.cardNumber}
-                  onChange={(e) => setPaymentInfo({ ...paymentInfo, cardNumber: e.target.value })}
-                  maxLength="19"
-                  style={{
-                    width: '100%',
-                    padding: '12px',
-                    border: '2px solid #e0e0e0',
-                    borderRadius: '8px',
-                    fontSize: '16px',
-                    boxSizing: 'border-box'
-                  }}
-                />
+            
+            <Elements stripe={stripePromise}>
+              <StripeCheckout 
+                amount={total + 5}
+                onSuccess={handlePaymentSuccess}
+                onError={handlePaymentError}
+              />
+            </Elements>
+            
+            <div style={{ marginTop: '20px', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '18px' }}>
+                <span>Total to Pay:</span>
+                <span>${(total + 5).toFixed(2)}</span>
               </div>
-              <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
-                <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: '500' }}>Expiry Date</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="MM/YY"
-                    value={paymentInfo.expiry}
-                    onChange={(e) => setPaymentInfo({ ...paymentInfo, expiry: e.target.value })}
-                    maxLength="5"
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      border: '2px solid #e0e0e0',
-                      borderRadius: '8px',
-                      fontSize: '16px',
-                      boxSizing: 'border-box'
-                    }}
-                  />
-                </div>
-                <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: '500' }}>CVC</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="123"
-                    value={paymentInfo.cvc}
-                    onChange={(e) => setPaymentInfo({ ...paymentInfo, cvc: e.target.value })}
-                    maxLength="4"
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      border: '2px solid #e0e0e0',
-                      borderRadius: '8px',
-                      fontSize: '16px',
-                      boxSizing: 'border-box'
-                    }}
-                  />
-                </div>
-              </div>
-              <div style={{ marginTop: '20px', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '18px' }}>
-                  <span>Total to Pay:</span>
-                  <span>${(total + 5).toFixed(2)}</span>
-                </div>
-              </div>
-              <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-                <Button type="button" variant="secondary" onClick={() => setStep('shipping')} style={{ flex: 1 }}>
-                  Back
-                </Button>
-                <Button type="submit" style={{ flex: 1 }}>
-                  Pay Now
-                </Button>
-              </div>
-            </form>
+            </div>
+            
+            <Button type="button" variant="secondary" onClick={() => setStep('shipping')} style={{ width: '100%', marginTop: '20px' }}>
+              Back to Shipping
+            </Button>
             <p style={{ fontSize: '12px', color: '#999', marginTop: '15px', textAlign: 'center' }}>
               🔒 Your payment information is secure and encrypted
             </p>
