@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
+import Blog from './components/Blog';
 import Contact from './components/Contact';
 import SearchBar from './components/SearchBar';
 import CategoryFilter from './components/CategoryFilter';
@@ -147,6 +148,7 @@ function App() {
       />
       </div>
       <About />
+      <Blog />
       <Contact />
       <CheckoutModal
         isOpen={isCheckoutOpen}
