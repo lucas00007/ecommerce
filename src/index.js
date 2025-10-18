@@ -6,10 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { Amplify } from 'aws-amplify';
 
 try {
-  const awsExports = require('./aws-exports').default;
-  Amplify.configure(awsExports);
+  const awsExports = require('./aws-exports');
+  Amplify.configure(awsExports.default || awsExports);
 } catch (e) {
-  console.warn('AWS Amplify configuration not found');
+  console.warn('AWS Amplify configuration not found:', e.message);
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

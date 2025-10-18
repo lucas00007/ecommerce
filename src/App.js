@@ -147,9 +147,15 @@ function App() {
         onCheckout={handleCheckout}
       />
       </div>
-      <About />
-      <Blog />
-      <Contact />
+      <div id="about">
+        <About />
+      </div>
+      <div id="blog">
+        <Blog />
+      </div>
+      <div id="contact">
+        <Contact />
+      </div>
       <CheckoutModal
         isOpen={isCheckoutOpen}
         onClose={handleCloseCheckout}

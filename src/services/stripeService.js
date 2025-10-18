@@ -17,7 +17,6 @@ export const createPaymentIntent = async (amount) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ amount }),
     });
-    
     const data = await response.json();
     return data;
   } catch (error) {
