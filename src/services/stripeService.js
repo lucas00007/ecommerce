@@ -12,8 +12,7 @@ export const getStripe = () => {
 
 export const createPaymentIntent = async (amount) => {
   try {
-    // Using Netlify function
-    const response = await fetch('/.netlify/functions/create-payment-intent', {
+    const response = await fetch('https://22w4k4y2kpqryypw7pysyfec6e0yuryv.lambda-url.us-east-1.on.aws/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ amount }),

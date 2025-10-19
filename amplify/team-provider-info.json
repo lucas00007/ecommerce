@@ -15,6 +15,11 @@
       "api": {
         "ecommerce": {}
       },
+      "function": {
+        "stripePayment": {
+          "stripeSecretKey": "PLACEHOLDER"
+        }
+      },
       "hosting": {
         "amplifyhosting": {
           "appId": "dj3ni5upkstd1",
