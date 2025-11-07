@@ -37,7 +37,19 @@ const Header = ({ cartItemCount, onCartClick, user, onAuthClick, onLogout }) => 
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <h1 style={{ margin: 0, fontSize: isMobile ? '24px' : '28px' }}>SDS</h1>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <img 
+            src="/logo.png" 
+            alt="SDS Logo" 
+            style={{ 
+              height: isMobile ? '40px' : '50px', 
+              width: 'auto',
+              borderRadius: '8px',
+              objectFit: 'contain'
+            }} 
+          />
+          <h1 style={{ margin: 0, fontSize: isMobile ? '24px' : '28px' }}>SDS</h1>
+        </div>
 
         {!isMobile && (
           <nav style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
