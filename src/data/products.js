@@ -2,7 +2,7 @@ export const products = [
   {
     id: 1,
     name: "Men's Andean Alpaca Sweater - Medium",
-    price: 49.99,
+    price: 54.99,
     category: "Men",
     size: "Medium",
     image: "/assets/Man-Sweater3.jpg",
@@ -12,7 +12,7 @@ export const products = [
   {
     id: 2,
     name: "Men's Andean Alpaca Sweater - Large",
-    price: 49.99,
+    price: 54.99,
     category: "Men",
     size: "Large",
     image: "/assets/Man-Sweater4.jpg",
@@ -22,7 +22,7 @@ export const products = [
   {
     id: 3,
     name: "Women's Andean Alpaca Sweater - Medium",
-    price: 49.99,
+    price: 54.99,
     category: "Women",
     size: "Medium",
     image: "/assets/Female-Sweater3.jpg",
@@ -32,7 +32,7 @@ export const products = [
   {
     id: 4,
     name: "Women's Andean Alpaca Sweater - Large",
-    price: 49.99,
+    price: 54.99,
     category: "Women",
     size: "Large",
     image: "/assets/Female-Sweater4.jpg",
